@@ -3,6 +3,7 @@ package com.example.aac_ex.Room
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -16,11 +17,14 @@ class RoomActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room)
 
-        val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-name").build()
-        //allowMainThreadQueries은 메인스레드에서도 룸디비를 사용할 수 있게 해주는것, 실전에서는 잘 안씀
+        val viewModel2 by lazy {
+            ViewModelProvider(this, RoomViewModel.Factory(application)).get(RoomViewModel::class.java)
+        }
+
+        //val viewModel = ViewModelProvider(this).get(RoomViewModel::class.java)
 
         //it은 todolist
-        db.todoDao().getAll().observe(this, Observer {
+        viewModel2.getAll().observe(this, Observer {
             tv_result.text = it.toString()
         })
 
@@ -29,7 +33,7 @@ class RoomActivity : AppCompatActivity() {
             //Dispatchers.IO 를 통해 백그라운드에서 돌아가게
             //lifecyleScope로 코루틴을 사용한 비동기처리 해줌
             lifecycleScope.launch(Dispatchers.IO) {
-                db.todoDao().insert(Todo(et_todo.text.toString()))
+                viewModel2.insert(Todo(et_todo.text.toString()))
             }
 
         }

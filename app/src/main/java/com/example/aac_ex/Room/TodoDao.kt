@@ -10,6 +10,7 @@ interface TodoDao {
     //관찰을 위해 LiveData<>로 감쌈
     @Insert
     fun insert(todo: Todo)
+
     @Update
     fun update(todo: Todo)
     @Delete
