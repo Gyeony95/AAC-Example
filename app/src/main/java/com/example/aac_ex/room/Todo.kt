@@ -1,4 +1,4 @@
-package com.example.aac_ex.Room
+package com.example.aac_ex.room
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

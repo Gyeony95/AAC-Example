@@ -1,4 +1,4 @@
-package com.example.aac_ex.Room
+package com.example.aac_ex.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

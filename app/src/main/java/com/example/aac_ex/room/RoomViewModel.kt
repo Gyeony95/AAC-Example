@@ -1,4 +1,4 @@
-package com.example.aac_ex.Room
+package com.example.aac_ex.room
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -14,6 +14,12 @@ class RoomViewModel(application : Application) : AndroidViewModel(application) {
 
     fun getAll(): LiveData<List<Todo>> {
         return db.todoDao().getAll()
+    }
+
+    var todos:LiveData<List<Todo>>
+
+    init {
+        todos = getAll()
     }
 
     //suspend를 사용하면 무조건 비동기 처리해야해서 코루틴 안에서 사용해야함
