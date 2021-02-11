@@ -16,7 +16,7 @@ class RoomViewModel(application : Application) : AndroidViewModel(application) {
         return db.todoDao().getAll()
     }
 
-    var todos:LiveData<List<Todo>>
+    var todos:LiveData<List<Todo >>
 
     init {
         todos = getAll()
